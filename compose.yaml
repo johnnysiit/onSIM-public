@@ -1,0 +1,68 @@
+name: onsim
+services:
+  asterisk:
+    image: localhost/onsim:latest
+    build:
+      context: .
+      dockerfile: Containerfile
+      args:
+        ONSIM_VERSION: ${ONSIM_VERSION:-dev}
+        ONSIM_REVISION: ${ONSIM_REVISION:-unknown}
+        ONSIM_BUILD_TIME: ${ONSIM_BUILD_TIME:-unknown}
+    command: ["asterisk"]
+    network_mode: host
+    volumes:
+      - ${ONSIM_HOST_DATA:-./data}:/var/lib/onsim
+      - asterisk-run:/run/asterisk
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "asterisk", "-rx", "core show uptime"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+  onsim:
+    image: localhost/onsim:latest
+    runtime: crun
+    command: ["onsim"]
+    network_mode: host
+    depends_on:
+      asterisk:
+        condition: service_healthy
+    environment:
+      ONSIM_LISTEN: ${ONSIM_LISTEN:-0.0.0.0:8989}
+      ONSIM_HTTP_LISTEN: ${ONSIM_HTTP_LISTEN:-0.0.0.0:8989}
+      ONSIM_TLS_LISTEN: ${ONSIM_TLS_LISTEN:-0.0.0.0:9443}
+      ONSIM_TLS_CERT: /var/lib/onsim/tls/onsim.crt
+      ONSIM_TLS_KEY: /var/lib/onsim/tls/onsim.key
+      ONSIM_TLS_CA: /var/lib/onsim/tls/onsim-ca.crt
+      ONSIM_DATA_DIR: /var/lib/onsim
+      ONSIM_MASTER_KEY: /var/lib/onsim/master.key
+      ONSIM_AT_PORT: /dev/onsim-at
+      ONSIM_AUDIO_PORT: /dev/onsim-audio
+      ONSIM_CONTROL_PORT: /dev/onsim-control
+      ONSIM_MODEM_MODE: ${ONSIM_MODEM_MODE:-auto}
+      ONSIM_GATEWAY_MODE: ${ONSIM_GATEWAY_MODE:-android}
+      ONSIM_ANDROID_SERIAL: ${ONSIM_ANDROID_SERIAL:-}
+      ONSIM_ANDROID_GATEWAYS: ${ONSIM_ANDROID_GATEWAYS:-}
+      ONSIM_ANDROID_SUBSCRIPTION_ID: ${ONSIM_ANDROID_SUBSCRIPTION_ID:-auto}
+      ONSIM_ANDROID_ADB_HOME: /var/lib/onsim/adb
+      ONSIM_ANDROID_TOKEN: /var/lib/onsim/android.token
+      ONSIM_PUBLIC_URL: ${ONSIM_PUBLIC_URL:-https://onsim.local:9443}
+      ONSIM_SIP_LISTEN: 127.0.0.1:5062
+      ONSIM_SIP_ASTERISK: 127.0.0.1:5060
+      ONSIM_SIP_TARGET: "1001"
+      ONSIM_ASTERISK_CONFIG: /var/lib/onsim/asterisk/pjsip-generated.conf
+    group_add:
+      - keep-groups
+    volumes:
+      - ${ONSIM_HOST_DATA:-./data}:/var/lib/onsim
+      - /dev/bus/usb:/dev/bus/usb
+      - asterisk-run:/run/asterisk
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://127.0.0.1:8989/healthz"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+volumes:
+  asterisk-run:

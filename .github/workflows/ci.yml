@@ -1,0 +1,56 @@
+name: CI
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "1.24.x"
+          cache: true
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+
+      - name: Install native libraries
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y gcc pkg-config libsqlite3-dev libopus-dev libopusfile-dev opus-tools
+
+      - name: Build frontend
+        working-directory: web
+        run: |
+          npm ci
+          npm audit --audit-level=high
+          npm run build
+
+      - name: Test Go packages
+        run: go test -tags libsqlite3 ./...
+
+      - name: Check formatting and generated artifacts
+        run: |
+          test -z "$(gofmt -l $(find . -name '*.go' -not -path './web/node_modules/*'))"
+          test ! -e webui/dist/index.html
+
+  secrets:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

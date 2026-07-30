@@ -1,0 +1,55 @@
+plugins {
+    id "com.android.application"
+}
+
+android {
+    namespace "io.onsim.gateway"
+    compileSdk 35
+
+    defaultConfig {
+        applicationId "io.onsim.gateway"
+        minSdk 28
+        // Android 10's IMS registration API is hidden behind the P greylist.
+        // This fixed-device, privileged system app targets 28 so the stock
+        // HydrogenOS framework permits that read-only telephony query.
+        targetSdk 28
+        versionCode 13
+        versionName "1.5.0"
+    }
+
+    buildFeatures {
+        buildConfig true
+    }
+    lint {
+        // This is a sideloaded Android 10 system application, not a Play
+        // Store package. Target 29 deliberately preserves the platform
+        // telephony/background behavior of the fixed gateway device.
+        disable "ExpiredTargetSdkVersion"
+    }
+
+    signingConfigs {
+        release {
+            if (System.getenv("ONSIM_ANDROID_KEYSTORE")) {
+                storeFile file(System.getenv("ONSIM_ANDROID_KEYSTORE"))
+                storePassword System.getenv("ONSIM_ANDROID_STORE_PASSWORD")
+                keyAlias System.getenv("ONSIM_ANDROID_KEY_ALIAS") ?: "onsim"
+                // PKCS12 (the modern keytool default) uses a single password
+                // for the store and private key.
+                keyPassword System.getenv("ONSIM_ANDROID_STORE_PASSWORD")
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            if (System.getenv("ONSIM_ANDROID_KEYSTORE")) {
+                signingConfig signingConfigs.release
+            }
+        }
+    }
+}
+
+dependencies {
+    testImplementation "junit:junit:4.13.2"
+}

@@ -1,0 +1,6 @@
+id=onsim-android-gateway
+name=onSIM Android Gateway
+version=1.5.0
+versionCode=13
+author=onSIM
+description=Installs the onSIM companion and OnePlus 5 telephony uplink routing.

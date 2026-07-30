@@ -1,0 +1,61 @@
+name: Bug report
+description: Report a reproducible onSIM problem without sharing private data
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Remove phone numbers, SIM/device identifiers, IP addresses, tokens,
+        message content, recordings, and private keys. Report vulnerabilities
+        privately according to SECURITY.md.
+  - type: dropdown
+    id: provider
+    attributes:
+      label: Gateway provider
+      options:
+        - Android
+        - SIM7600
+        - Mock
+        - Not provider-specific
+    validations:
+      required: true
+  - type: input
+    id: revision
+    attributes:
+      label: Version or Git revision
+      placeholder: v0.x.y or commit SHA
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: OS, architecture, browser, phone/modem model, and redacted firmware/build
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Reproduction steps
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior and redacted logs
+    validations:
+      required: true
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: Privacy check
+      options:
+        - label: I removed real numbers, identifiers, credentials, messages, and recordings.
+          required: true

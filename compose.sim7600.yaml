@@ -1,0 +1,8 @@
+services:
+  onsim:
+    environment:
+      ONSIM_GATEWAY_MODE: sim7600
+    devices:
+      - /dev/onsim-at:/dev/onsim-at
+      - /dev/onsim-audio:/dev/onsim-audio
+      - /dev/onsim-control:/dev/onsim-control

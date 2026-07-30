@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">onSIM Gateway</string>
+    <string name="service_description">onSIM cellular call and SMS gateway</string>
+</resources>

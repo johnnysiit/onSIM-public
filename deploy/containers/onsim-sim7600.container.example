@@ -1,0 +1,28 @@
+[Unit]
+Description=onSIM SIM7600 gateway container
+Requires=onsim-asterisk.service
+After=onsim-asterisk.service
+
+[Container]
+Image=localhost/onsim:latest
+ContainerName=onsim
+Network=host
+Exec=onsim
+Environment=ONSIM_GATEWAY_MODE=sim7600
+EnvironmentFile=%h/.config/onsim/onsim.env
+AddDevice=/dev/onsim-at:/dev/onsim-at
+AddDevice=/dev/onsim-audio:/dev/onsim-audio
+AddDevice=/dev/onsim-control:/dev/onsim-control
+PodmanArgs=--runtime=crun --group-add=keep-groups
+Volume=%h/.local/share/onsim:/var/lib/onsim
+Volume=asterisk-run.volume:/run/asterisk
+HealthCmd=curl -fsS http://127.0.0.1:8989/healthz
+HealthInterval=30s
+HealthTimeout=5s
+
+[Service]
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=default.target

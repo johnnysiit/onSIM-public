@@ -1,0 +1,23 @@
+[Unit]
+Description=Asterisk PBX for onSIM
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=asterisk
+Group=asterisk
+ExecStart=/usr/sbin/asterisk -f -U asterisk -G asterisk
+ExecReload=/usr/sbin/asterisk -rx "module reload res_pjsip.so"
+ExecStop=/usr/sbin/asterisk -rx "core stop now"
+Restart=on-failure
+RestartSec=3
+LimitNOFILE=8192
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectHome=true
+ProtectSystem=full
+ReadWritePaths=/var/lib/asterisk /var/log/asterisk /var/spool/asterisk /run/asterisk
+
+[Install]
+WantedBy=multi-user.target

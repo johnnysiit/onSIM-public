@@ -1,0 +1,9 @@
+[Unit]
+Description=Back up onSIM SQLite database
+
+[Service]
+Type=oneshot
+User=root
+ExecStart=/usr/local/libexec/onsim-backup
+Nice=10
+IOSchedulingClass=idle

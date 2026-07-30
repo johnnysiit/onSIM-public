@@ -1,0 +1,19 @@
+FROM docker.io/library/gradle:8.5-jdk17
+
+USER root
+ENV ANDROID_HOME=/opt/android-sdk \
+    ANDROID_SDK_ROOT=/opt/android-sdk
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends wget unzip \
+    && rm -rf /var/lib/apt/lists/* \
+    && mkdir -p /opt/android-sdk/cmdline-tools \
+    && wget -q https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip -O /tmp/tools.zip \
+    && unzip -q /tmp/tools.zip -d /opt/android-sdk/cmdline-tools \
+    && mv /opt/android-sdk/cmdline-tools/cmdline-tools /opt/android-sdk/cmdline-tools/latest \
+    && rm /tmp/tools.zip \
+    && yes | /opt/android-sdk/cmdline-tools/latest/bin/sdkmanager --licenses >/dev/null \
+    && /opt/android-sdk/cmdline-tools/latest/bin/sdkmanager \
+       "platforms;android-35" "build-tools;35.0.0" "build-tools;34.0.0" "platform-tools"
+
+WORKDIR /src
+ENTRYPOINT ["gradle", "--no-daemon"]

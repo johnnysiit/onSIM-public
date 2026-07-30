@@ -1,0 +1,10 @@
+# SIMCom SIM7600 USB composition 1e0e:9011. On this composition interface 04
+# is the AT command port (ttyUSB2) and interface 06 is binary PCM (ttyUSB4).
+SUBSYSTEM=="tty", ATTRS{idVendor}=="1e0e", ATTRS{idProduct}=="9011", ENV{ID_USB_INTERFACE_NUM}=="04", SYMLINK+="onsim-at", GROUP="plugdev", MODE="0660", TAG+="uaccess"
+SUBSYSTEM=="tty", ATTRS{idVendor}=="1e0e", ATTRS{idProduct}=="9011", ENV{ID_USB_INTERFACE_NUM}=="05", SYMLINK+="onsim-control", GROUP="plugdev", MODE="0660", TAG+="uaccess"
+SUBSYSTEM=="tty", ATTRS{idVendor}=="1e0e", ATTRS{idProduct}=="9011", ENV{ID_USB_INTERFACE_NUM}=="06", SYMLINK+="onsim-audio", GROUP="plugdev", MODE="0660", TAG+="uaccess"
+
+# OnePlus Android Debug Bridge and bootloader interfaces. Runtime access is
+# restricted to plugdev and passed into the rootless onSIM container.
+SUBSYSTEM=="usb", ATTR{idVendor}=="2a70", MODE="0660", GROUP="plugdev", TAG+="uaccess"
+SUBSYSTEM=="usb", ATTR{idVendor}=="18d1", MODE="0660", GROUP="plugdev", TAG+="uaccess"

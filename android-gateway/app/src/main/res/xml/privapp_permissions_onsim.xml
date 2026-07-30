@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<permissions>
+    <privapp-permissions package="io.onsim.gateway">
+        <permission name="android.permission.CAPTURE_AUDIO_OUTPUT"/>
+        <permission name="android.permission.READ_PRIVILEGED_PHONE_STATE"/>
+        <permission name="android.permission.WRITE_SMS"/>
+        <permission name="android.permission.BROADCAST_SMS"/>
+        <permission name="android.permission.BROADCAST_WAP_PUSH"/>
+    </privapp-permissions>
+</permissions>

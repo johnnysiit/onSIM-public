@@ -1,0 +1,72 @@
+# Local configuration and secrets
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+*.p12
+*.pfx
+*.jks
+*.keystore
+*.mobileprovision
+adbkey
+adbkey.pub
+signing.env
+secrets/
+certs/
+
+# Runtime state and user data
+/data/
+/recordings/
+/backups/
+*.db
+*.db-*
+*.sqlite
+*.sqlite-*
+*.sqlite3
+*.log
+*.pid
+
+# Firmware, signed applications, and generated release artifacts
+/dist/
+*.apk
+*.aab
+*.apks
+*.img
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+*.sha256
+
+# Go outputs
+/onsim
+/onsim-media-probe
+coverage.out
+coverage.*
+*.test
+
+# Frontend dependencies and generated bundles
+/web/node_modules/
+/web/dist/
+/web/*.tsbuildinfo
+/webui/dist/*
+!/webui/dist/README.txt
+
+# Android/Gradle
+/android-gateway/.gradle/
+/android-gateway/app/build/
+/android-gateway/build/
+/android-gateway/local.properties
+
+# Editor, OS, and local tool state
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.cache/
+.pytest_cache/
+.openai/hosting.json

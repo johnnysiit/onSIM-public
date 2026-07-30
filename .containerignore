@@ -1,0 +1,11 @@
+.git
+.paseo
+data
+dist
+android-gateway/.gradle
+android-gateway/app/build
+onsim
+web/node_modules
+web/dist
+*.db
+*.db-*

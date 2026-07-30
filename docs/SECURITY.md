@@ -1,5 +1,7 @@
 # Security and privacy guide
 
+[简体中文](SECURITY.zh-CN.md)
+
 ## Data stored by onSIM
 
 Depending on enabled features, the data directory can contain:

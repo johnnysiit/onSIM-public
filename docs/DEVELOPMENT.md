@@ -1,5 +1,7 @@
 # Development and testing
 
+[简体中文](DEVELOPMENT.zh-CN.md)
+
 ## Native dependencies
 
 ```sh

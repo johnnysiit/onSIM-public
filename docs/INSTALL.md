@@ -1,5 +1,7 @@
 # Production installation and operations
 
+[简体中文](INSTALL.zh-CN.md)
+
 This guide installs onSIM as two rootless Podman containers:
 
 - `onsim`: Web/API, providers, media, Telegram, and persistence

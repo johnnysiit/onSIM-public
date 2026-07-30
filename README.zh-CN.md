@@ -7,7 +7,7 @@ USB 模块接入网页、Telegram 和可选的 SIP 客户端，通话记录、�
 在自己的设备上。
 
 > 本项目会操作真实电话和短信。对外开放前请阅读
-> [安全与隐私指南](docs/SECURITY.md)。它不能替代紧急呼叫或生命安全设备。
+> [安全与隐私指南](docs/SECURITY.zh-CN.md)。它不能替代紧急呼叫或生命安全设备。
 
 ## 功能
 
@@ -73,9 +73,9 @@ scripts/install-containers.sh
 
 随后根据硬件继续：
 
-- [完整安装与运维教程](docs/INSTALL.md)
-- [Android 网关教程](docs/ANDROID_GATEWAY.md)
-- [SIM7600 教程](docs/SIM7600.md)
+- [完整安装与运维教程](docs/INSTALL.zh-CN.md)
+- [Android 网关教程](docs/ANDROID_GATEWAY.zh-CN.md)
+- [SIM7600 教程](docs/SIM7600.zh-CN.md)
 
 安装后先从 `http://<主机IP>:8989/onsim-ca.crt` 导入本地 CA，再访问
 `https://<主机IP>:9443`。对公网开放时，应使用公网可信证书或通过可信 VPN
@@ -92,12 +92,12 @@ scripts/install-containers.sh
 
 ## 文档
 
-- [安装与运维](docs/INSTALL.md)
-- [Android 网关](docs/ANDROID_GATEWAY.md)
-- [SIM7600 网关](docs/SIM7600.md)
-- [配置参考](docs/CONFIGURATION.md)
-- [安全与隐私](docs/SECURITY.md)
-- [开发与测试](docs/DEVELOPMENT.md)
+- [安装与运维](docs/INSTALL.zh-CN.md)
+- [Android 网关](docs/ANDROID_GATEWAY.zh-CN.md)
+- [SIM7600 网关](docs/SIM7600.zh-CN.md)
+- [配置参考](docs/CONFIGURATION.zh-CN.md)
+- [安全与隐私](docs/SECURITY.zh-CN.md)
+- [开发与测试](docs/DEVELOPMENT.zh-CN.md)
 - [参与贡献](CONTRIBUTING.md)
 - [报告安全问题](SECURITY.md)
 
@@ -129,7 +129,7 @@ make test
 ```
 
 生产 Containerfile 在构建时也会运行完整 Go 测试。更多说明见
-[开发文档](docs/DEVELOPMENT.md)。
+[开发文档](docs/DEVELOPMENT.zh-CN.md)。
 
 ## 限制与责任
 

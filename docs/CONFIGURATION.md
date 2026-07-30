@@ -1,5 +1,7 @@
 # Configuration reference
 
+[简体中文](CONFIGURATION.zh-CN.md)
+
 Production configuration lives in `~/.config/onsim/onsim.env` with mode `0600`.
 Do not create a real `.env` inside the repository.
 

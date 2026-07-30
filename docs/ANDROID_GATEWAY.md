@@ -1,5 +1,7 @@
 # Android gateway
 
+[简体中文](ANDROID_GATEWAY.zh-CN.md)
+
 The Android provider uses a dedicated phone as a cellular gateway. Control and
 16 kHz PCM audio travel over private ADB forwards. The Companion becomes the
 default phone and SMS application and needs privileged system permissions.

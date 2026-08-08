@@ -13,7 +13,7 @@ service.
 
 ## Gallary 
 <img width="1865" height="785" alt="image" src="https://github.com/user-attachments/assets/66a14d48-638e-4b39-a614-4ebf0f4ccd54" />
-<img width="1792" height="1299" alt="image" src="https://github.com/user-attachments/assets/884ac708-2bed-44ae-90ef-3fa3e56a4bbd" />
+<img width="1766" height="1317" alt="image" src="https://github.com/user-attachments/assets/47e6a36a-5d15-433c-abf6-70034f4a3b2c" />
 <img width="1315" height="1295" alt="image" src="https://github.com/user-attachments/assets/97b5d2eb-3c38-4d66-93b7-7ac7f49da94e" />
 <img width="1074" height="1021" alt="image" src="https://github.com/user-attachments/assets/c746ba5a-4151-4310-8a02-018b35806ebe" />
 <img width="526" height="461" alt="image" src="https://github.com/user-attachments/assets/1ed32b6f-5dac-44db-bc56-5a6e48a471b9" />
